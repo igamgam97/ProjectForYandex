@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ApplicationForYandex</string>
+    <string name="desc_item_image">image for main activity</string>
+</resources>
