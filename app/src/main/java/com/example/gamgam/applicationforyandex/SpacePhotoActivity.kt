@@ -1,56 +1,61 @@
 package com.example.gamgam.applicationforyandex
 
 
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.view.WindowManager
-import android.widget.ImageView
-import android.widget.ProgressBar
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.GlideDrawable
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
-import com.github.chrisbanes.photoview.PhotoView
-import java.lang.Exception
-
+import android.support.v4.view.ViewPager
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
+import android.view.Menu
+import kotlinx.android.synthetic.main.activity_phot_detail2.*
 
 class SpacePhotoActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_photo_detail)
-        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-        val mImageView = findViewById<PhotoView>(R.id.image)
-        val imageSpace = intent.getParcelableExtra<ImageSpace>(EXTRA_SPACE_PHOTO)
-        val  progressBar = findViewById<ProgressBar>(R.id.progress)
+        setContentView(R.layout.activity_phot_detail2)
+        val toolbar=findViewById<Toolbar>(R.id.toolbar2)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowHomeEnabled(true)
+        //window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        val mPager = findViewById<ViewPager>(R.id.pager)
+        val adapter = MyViewPagerAdapter(this,ImageSpace.getSpacePhotos())
+        mPager.adapter=adapter
+        mPager.setCurrentItem(2,true)
+        displayMetaInfo(2)
+        val viewPagerPageChangeListener = object : ViewPager.OnPageChangeListener {
 
-        Glide.with(this)
-                .load(imageSpace.url)
-                .asBitmap()
-                .listener(object : RequestListener<String, Bitmap>{
-                    override fun onException(e: Exception?, model: String?, target: Target<Bitmap>?, isFirstResource: Boolean): Boolean {
-                        progressBar.visibility = View.GONE
-                        return false
-                    }
+            override fun onPageSelected(position: Int) {
+                displayMetaInfo(position)
 
-                    override fun onResourceReady(resource: Bitmap?, model: String?, target: Target<Bitmap>?, isFromMemoryCache: Boolean, isFirstResource: Boolean): Boolean {
-                        progressBar.visibility = View.GONE
-                        return false
-                    }
+            }
 
-                })
-                .placeholder(R.drawable.ic_preview_image)
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .into(mImageView)
+            override fun onPageScrolled(arg0: Int, arg1: Float, arg2: Int) {
+            }
+
+            override fun onPageScrollStateChanged(arg0: Int) {
+
+            }
+        }
+        mPager.addOnPageChangeListener(viewPagerPageChangeListener)
+
 
     }
 
     companion object {
 
         val EXTRA_SPACE_PHOTO = "SpacePhotoActivity.SPACE_PHOTO"
+    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_info_menu,menu)
+        return true
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
+    private fun displayMetaInfo(position: Int) {
+        name_film.text =resources.getString(R.string.position_of_detailview,position+1,ImageSpace.getSpacePhotos().size)
     }
 }
