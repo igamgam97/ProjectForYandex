@@ -1,11 +1,17 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="Theme.Styled" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@android:color/black</item>
         <item name="colorPrimary">@color/mainColorPrimary</item>
         <item name="colorPrimaryDark">@color/mainColorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <!-- launch application theme. -->
+    <style name="AppTheme.Launcher" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@drawable/launch_screen</item>
     </style>
     <!-- Theme for SpacePhotoActivity. -->
     <style name="Theme.SpacePhoto" parent="Theme.AppCompat.NoActionBar">
@@ -16,12 +22,12 @@
     </style>
 
 
-
     <style name="HorizontelProgress" parent="Theme.AppCompat">
         <!-- Customize your progressbar here. -->
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:progressBackgroundTint">@color/themeForImage</item>
     </style>
+
     <style name="MainToolBar">
         <item name="android:background">@color/mainColorPrimaryDark</item>
     </style>

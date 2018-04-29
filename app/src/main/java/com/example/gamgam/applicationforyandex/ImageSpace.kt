@@ -25,9 +25,10 @@ class ImageSpace(val url:String, val title:String):Parcelable{
         override fun newArray(size: Int): Array<ImageSpace?> {
             return arrayOfNulls(size)
         }
+
         fun getSpacePhotos(): Array<ImageSpace> {
 
-            return arrayOf<ImageSpace>(ImageSpace("http://i.imgur.com/zuG2bGQ.jpg", "Galaxy"),
+            return arrayOf(ImageSpace("http://i.imgur.com/zuG2bGQ.jpg", "Galaxy"),
                     ImageSpace("http://i.imgur.com/ovr0NAF.jpg", "Space Shuttle"),
                     ImageSpace("http://i.imgur.com/n6RfJX2.jpg", "Galaxy Orion"),
                     ImageSpace("http://i.imgur.com/qpr5LR2.jpg", "Earth"),

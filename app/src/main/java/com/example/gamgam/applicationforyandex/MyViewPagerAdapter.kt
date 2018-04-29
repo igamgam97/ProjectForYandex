@@ -34,26 +34,26 @@ class MyViewPagerAdapter(private val spacePhotoActivity: SpacePhotoActivity,priv
         val phootoView =view.findViewById<PhotoView>(R.id.image)
         val  progressBar =view.findViewById<ProgressBar>(R.id.progress)
         val imageSpace = images[position]
+
         Glide.with(context)
                 .load(imageSpace.url)
                 .asBitmap()
                 .listener(object : RequestListener<String, Bitmap> {
                     override fun onException(e: Exception?, model: String?, target: Target<Bitmap>?, isFirstResource: Boolean): Boolean {
-                        //spacePhotoActivity.progress2.visibility=View.GONE
                         progressBar.visibility = View.GONE
                         return false
                     }
 
                     override fun onResourceReady(resource: Bitmap?, model: String?, target: Target<Bitmap>?, isFromMemoryCache: Boolean, isFirstResource: Boolean): Boolean {
-                        //spacePhotoActivity.progress2.visibility=View.GONE
                         progressBar.visibility = View.GONE
                         return false
                     }
 
+
                 })
-                .placeholder(R.drawable.ic_preview_image)
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(phootoView)
+
         container.addView(view)
         return view
     }
