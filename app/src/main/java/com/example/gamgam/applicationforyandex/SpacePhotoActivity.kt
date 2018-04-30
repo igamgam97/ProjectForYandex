@@ -4,19 +4,25 @@ package com.example.gamgam.applicationforyandex
 import android.os.Bundle
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Menu
 import kotlinx.android.synthetic.main.activity_space_photo.*
 
 class SpacePhotoActivity : AppCompatActivity() {
+    lateinit var mResults:ArrayList<Result>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_space_photo)
         fillProgressBar()
+        mResults = intent.extras.getParcelableArrayList<Result>(EXTRA_SPACE_PHOTO)
+        val position=intent.extras.getInt("some_name")
+        Log.d("mytag",mResults[0].toString())
         //window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-        val adapter = MyViewPagerAdapter(this,ImageSpace.getSpacePhotos())
+        val adapter = PosterPagerAdapter(mResults)
+        //val adapter = MyViewPagerAdapter(ImageSpace.getSpacePhotos())
         pager.adapter=adapter
-        pager.setCurrentItem(2,true)
-        displayMetaInfo(2)
+        pager.setCurrentItem(position,true)
+        displayMetaInfo(position)
         pager.addOnPageChangeListener(getOnPageChageListerner())
 
 
@@ -65,5 +71,5 @@ private fun SpacePhotoActivity.getOnPageChageListerner(): ViewPager.OnPageChange
 }
 
 private fun SpacePhotoActivity.displayMetaInfo(position: Int) {
-    position_poster.text =resources.getString(R.string.position_of_detailview,position+1,ImageSpace.getSpacePhotos().size)
+    position_poster.text =resources.getString(R.string.position_of_detailview,position+1,mResults.size)
 }

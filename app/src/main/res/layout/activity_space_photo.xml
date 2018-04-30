@@ -13,7 +13,8 @@
         android:id="@+id/toolbar_space_photo_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="?attr/actionBarSize" />
+        android:minHeight="?attr/actionBarSize"
+        style="@style/ToolBar"/>
 
     <TextView
         android:id="@+id/position_poster"

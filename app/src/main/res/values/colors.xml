@@ -6,4 +6,6 @@
     <color name="themeForImage">#000000</color>
     <color name="mainColorPrimary">#ff94c2</color>
     <color name="mainColorPrimaryDark">#ba2d65</color>
+    <color name="spacePhohoColorPrimaryDark">#66000000</color>
+    <color name="spacePhohoColorPrimary">#66000000</color>
 </resources>

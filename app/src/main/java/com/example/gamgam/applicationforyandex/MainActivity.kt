@@ -25,13 +25,15 @@ class MainActivity : AppCompatActivity() {
         rv_images.setHasFixedSize(true)
         rv_images.layoutManager = layoutManager
         val theMovieDBApi = Controller.getApi()
-        val mSpacePhotos=ArrayList<ImageSpace>()
+        val mResults=ArrayList<Result>()
+        refheshView(mResults)
         theMovieDBApi!!.getDate()
                 .subscribeOn(Schedulers.io())
                 .flatMapIterable { item -> item.results }
+                .doOnNext{item -> mResults.add(item)}
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe{item -> Log.d("mytag", item.toString())}
-
+                .subscribe{refheshView(mResults)}
+        /*
         val adapter = ImageGalleryAdapter(ImageSpace.getSpacePhotos()){ itemView: View, position: Int,spacePhoto:ImageSpace ->
             if (position != RecyclerView.NO_POSITION) {
                 val intent = Intent(itemView.context, SpacePhotoActivity::class.java)
@@ -40,6 +42,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         rv_images.adapter = adapter
+        */
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -52,4 +55,16 @@ class MainActivity : AppCompatActivity() {
         if (id === R.id.action_seach) Log.d("mytag","click")
         return super.onOptionsItemSelected(item)
     }
+
+    fun refheshView(mResults:ArrayList<Result>){
+        val adapter = PosterGalleryAdapter(mResults){ itemView: View, position: Int, mResult:Result ->
+            if (position != RecyclerView.NO_POSITION) {
+                val intent = Intent(itemView.context, SpacePhotoActivity::class.java)
+                intent.putParcelableArrayListExtra(SpacePhotoActivity.EXTRA_SPACE_PHOTO, mResults)
+                intent.putExtra("some_name",position)
+                itemView.context.startActivity(intent)
+            }
+        }
+        rv_images.adapter = adapter
+        }
 }

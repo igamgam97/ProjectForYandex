@@ -1,6 +1,5 @@
 package com.example.gamgam.applicationforyandex
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.support.v4.view.PagerAdapter
 import android.view.LayoutInflater
@@ -14,10 +13,9 @@ import com.bumptech.glide.request.target.Target
 import com.github.chrisbanes.photoview.PhotoView
 import java.lang.Exception
 
-
-class MyViewPagerAdapter(private val spacePhotoActivity: SpacePhotoActivity,private val images:Array<ImageSpace>) : PagerAdapter() {
+class PosterPagerAdapter(private val images:ArrayList<Result>) : PagerAdapter() {
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
-        return view === (`object` as View)
+        return view === `object`
     }
 
     override fun getCount(): Int {
@@ -25,18 +23,17 @@ class MyViewPagerAdapter(private val spacePhotoActivity: SpacePhotoActivity,priv
     }
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-        container.removeView(`object` as View )
+        container.removeView(`object` as View)
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val context = spacePhotoActivity as Context
-        val view = LayoutInflater.from(context).inflate(R.layout.slider_image,container,false)
+        val view = LayoutInflater.from(container.context).inflate(R.layout.slider_image,container,false)
         val phootoView =view.findViewById<PhotoView>(R.id.image)
         val  progressBar =view.findViewById<ProgressBar>(R.id.progress)
         val imageSpace = images[position]
 
-        Glide.with(context)
-                .load(imageSpace.url)
+        Glide.with(container.context)
+                .load(imageSpace.urlBigPoster)
                 .asBitmap()
                 .listener(object : RequestListener<String, Bitmap> {
                     override fun onException(e: Exception?, model: String?, target: Target<Bitmap>?, isFirstResource: Boolean): Boolean {
