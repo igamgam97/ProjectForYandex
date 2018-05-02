@@ -11,7 +11,7 @@ data class Result (val title: String,@SerializedName("poster_path")  val posterP
     var urlSmallPoster:String = ""
         get() = "https://image.tmdb.org/t/p/w342/$posterPath"
     var urlBigPoster:String=""
-        get() = "https://image.tmdb.org/t/p/w780/$posterPath"
+        get() = "https://image.tmdb.org/t/p/original/$posterPath"
 
     constructor(parcel: Parcel) : this(
             parcel.readString(),

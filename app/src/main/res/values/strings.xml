@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">50 Posters</string>
+    <string name="app_name">SomePopularPosters</string>
     <string name="desc_item_image">image for main activity</string>
     <string name="action_seach">Search</string>
     <string name="accessibility_overflow">50 Posters</string>

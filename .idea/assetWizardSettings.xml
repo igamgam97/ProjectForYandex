@@ -23,7 +23,8 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="paddingPercent" value="50" />
+                                                <entry key="paddingPercent" value="5" />
+                                                <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -34,7 +35,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/D:/androidstudio/plugins/android/lib/android.jar!/images/material_design_icons/image/ic_image_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/D:/androidstudio/plugins/android/lib/android.jar!/images/material_design_icons/av/ic_movie_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -45,7 +46,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="paddingPercent" value="25" />
+                                                <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -55,10 +56,11 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="imageAsset" value="C:\Users\Gamgam\Downloads\jpeg.png" />
-                                      <entry key="outputName" value="ic_preview_image" />
+                                      <entry key="assetType" value="IMAGE" />
+                                      <entry key="imageAsset" value="C:\Users\Gamgam\Downloads\clapperboard (1).png" />
+                                      <entry key="outputName" value="logo_image" />
                                       <entry key="theme" value="CUSTOM" />
-                                      <entry key="themeColor" value="ba2d65" />
+                                      <entry key="themeColor" value="7b1fa2" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -80,12 +82,36 @@
                                           </PersistentState>
                                         </value>
                                       </entry>
+                                      <entry key="foregroundImage">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="scalingPercent" value="42" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
                                     </map>
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="foregroundAssetType" value="CLIP_ART" />
+                                      <entry key="backgroundAssetType" value="COLOR" />
+                                      <entry key="backgroundColor" value="000000" />
+                                      <entry key="foregroundImage" value="C:\Users\Gamgam\Downloads\clapperboard (1).png" />
                                       <entry key="foregroundLayerName" value="image" />
+                                    </map>
+                                  </option>
+                                </PersistentState>
+                              </value>
+                            </entry>
+                            <entry key="launcherLegacy">
+                              <value>
+                                <PersistentState>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="outputName" value="splash_image" />
                                     </map>
                                   </option>
                                 </PersistentState>

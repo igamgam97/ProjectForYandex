@@ -4,8 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="themeForImage">#000000</color>
-    <color name="mainColorPrimary">#ff94c2</color>
-    <color name="mainColorPrimaryDark">#ba2d65</color>
+    <color name="mainColorPrimary">#7b1fa2</color>
+    <color name="mainColorPrimaryDark">#4a0072</color>
     <color name="spacePhohoColorPrimaryDark">#66000000</color>
     <color name="spacePhohoColorPrimary">#66000000</color>
 </resources>

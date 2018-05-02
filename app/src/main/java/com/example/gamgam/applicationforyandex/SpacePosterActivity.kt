@@ -7,8 +7,10 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import kotlinx.android.synthetic.main.activity_space_photo.*
+import kotlinx.android.synthetic.main.activity_space_photo.view.*
 
 class SpacePhotoActivity : AppCompatActivity() {
+    var statusProgressBar=true
     lateinit var mResults:ArrayList<Result>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,13 +20,12 @@ class SpacePhotoActivity : AppCompatActivity() {
         val position=intent.extras.getInt("some_name")
         Log.d("mytag",mResults[0].toString())
         //window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-        val adapter = PosterPagerAdapter(mResults)
-        //val adapter = MyViewPagerAdapter(ImageSpace.getSpacePhotos())
+        val adapter = PosterPagerAdapter(this,mResults)
         pager.adapter=adapter
         pager.setCurrentItem(position,true)
         displayMetaInfo(position)
         pager.addOnPageChangeListener(getOnPageChageListerner())
-
+        pager.setOnClickListener { Log.d("mytag","pager on click") }
 
     }
 
@@ -69,7 +70,17 @@ private fun SpacePhotoActivity.getOnPageChageListerner(): ViewPager.OnPageChange
         }
     }
 }
+fun SpacePhotoActivity.hideorShowProgressBar(){
+    if(statusProgressBar){
+        supportActionBar!!.hide()
+        statusProgressBar=false
+    }else{
+        supportActionBar!!.show()
+        statusProgressBar=true
+    }
+    //toolbar_space_photo_activity.animate().translationY((-toolbar_space_photo_activity.height).toFloat()).interpolator = LinearInterpolator()
+}
 
 private fun SpacePhotoActivity.displayMetaInfo(position: Int) {
-    position_poster.text =resources.getString(R.string.position_of_detailview,position+1,mResults.size)
+   toolbar_space_photo_activity.position_poster.text=resources.getString(R.string.position_of_detailview,position+1,mResults.size)
 }

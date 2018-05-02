@@ -13,7 +13,7 @@ import com.bumptech.glide.request.target.Target
 import com.github.chrisbanes.photoview.PhotoView
 import java.lang.Exception
 
-class PosterPagerAdapter(private val images:ArrayList<Result>) : PagerAdapter() {
+class PosterPagerAdapter(private val spacePhotoActivity: SpacePhotoActivity,private val images:ArrayList<Result>) : PagerAdapter() {
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view === `object`
     }
@@ -48,8 +48,12 @@ class PosterPagerAdapter(private val images:ArrayList<Result>) : PagerAdapter() 
 
 
                 })
+                .error(R.drawable.logo_image)
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(phootoView)
+                phootoView.setOnClickListener{
+                    spacePhotoActivity.hideorShowProgressBar()
+                }
 
         container.addView(view)
         return view

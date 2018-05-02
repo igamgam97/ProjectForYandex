@@ -4,7 +4,6 @@
         android:id="@+id/iv_photo"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        android:src="@mipmap/image"
         android:contentDescription="@string/desc_item_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

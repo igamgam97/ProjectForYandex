@@ -22,10 +22,12 @@ class PosterGalleryAdapter(private val mResults: ArrayList<Result>,private val l
         private val imageView = itemView.findViewById<ImageView>(R.id.iv_photo)!!
 
         fun bind(mResult: Result, position: Int,listener:(View, Int, Result)->Unit) {
+            //placeholder in Glide add to avoid flicker
             Glide.with(itemView.context)
                     .load(mResult.urlSmallPoster)
                     .crossFade()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .placeholder(R.drawable.logo_image)
                     .into(imageView)
 
             imageView.setOnClickListener {

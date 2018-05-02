@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v4.view.ViewPager
+    <com.example.gamgam.applicationforyandex.CustomPagerView
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
@@ -14,14 +14,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
-        style="@style/ToolBar"/>
+        style="@style/ToolBar">
+        <TextView
+            android:id="@+id/position_poster"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar_space_photo_activity"
+            android:gravity="center" />
+    </android.support.v7.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/position_poster"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar_space_photo_activity"
-        android:layout_centerHorizontal="true" />
+
 
 
 </RelativeLayout>
