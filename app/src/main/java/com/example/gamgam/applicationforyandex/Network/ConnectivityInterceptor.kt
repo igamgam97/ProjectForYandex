@@ -1,4 +1,4 @@
-package com.example.gamgam.applicationforyandex
+package com.example.gamgam.applicationforyandex.Network
 
 import android.content.Context
 import android.net.ConnectivityManager

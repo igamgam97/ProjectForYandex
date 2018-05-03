@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import android.view.View
 import android.widget.Toast
-import com.example.gamgam.applicationforyandex.NoConnectivityException
+import com.example.gamgam.applicationforyandex.Network.NoConnectivityException
 import com.example.gamgam.applicationforyandex.PosterGalleryAdapter
 import com.example.gamgam.applicationforyandex.R
 import com.example.gamgam.applicationforyandex.TheMovieDB_API.Controller
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
     private fun showTypeOfError(error:Throwable){
         when(error){
             is NoConnectivityException -> {
-                Toasty.error(applicationContext,"Check your internet connection",Toast.LENGTH_SHORT,true).show()
+                Toasty.error(applicationContext,"Check your network connection",Toast.LENGTH_SHORT,true).show()
             }
             else ->{
                 Toasty.error(applicationContext,"Unknown error",Toast.LENGTH_SHORT,true).show()
@@ -74,10 +74,10 @@ class MainActivity : AppCompatActivity() {
     }
     private fun getDataList(){
         mResults.clear()
-        rv_images.adapter.notifyDataSetChanged()
+        //rv_images.adapter.notifyDataSetChanged()
         theMovieDBApi.getDate()
                 .subscribeOn(Schedulers.io())
-                .doOnNext { item -> mResults.addAll(item.results) }
+                .doOnNext { item -> mResults.addAll(item.results.sorted()) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({refheshView()},{ error ->
                     showTypeOfError(error)})

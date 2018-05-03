@@ -7,7 +7,13 @@ import com.google.gson.annotations.SerializedName
 
 data class InfoModel (val page: Int, val totalResults: Int, val totalPages: Int, val results: List<Result>)
 
-data class Result (val title: String,@SerializedName("poster_path") private val posterPath: String):Parcelable{
+data class Result (val title: String, private val popularity:Double, @SerializedName("poster_path") private val posterPath: String):Parcelable,Comparable<Result>{
+    override fun compareTo(other: Result)=when{
+        popularity < other.popularity -> 1
+        popularity > other.popularity -> -1
+        else ->0
+    }
+
     var urlSmallPoster:String = ""
         get() = "https://image.tmdb.org/t/p/w342/$posterPath"
     var urlBigPoster:String=""
@@ -15,10 +21,12 @@ data class Result (val title: String,@SerializedName("poster_path") private val 
 
     constructor(parcel: Parcel) : this(
             parcel.readString(),
+            parcel.readDouble(),
             parcel.readString())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(title)
+        parcel.writeDouble(popularity)
         parcel.writeString(posterPath)
     }
 
