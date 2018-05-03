@@ -1,4 +1,4 @@
-package com.example.gamgam.applicationforyandex
+package com.example.gamgam.applicationforyandex.TheMovieDB_API
 
 import android.os.Parcel
 import android.os.Parcelable
@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 
 data class InfoModel (val page: Int, val totalResults: Int, val totalPages: Int, val results: List<Result>)
 
-data class Result (val title: String,@SerializedName("poster_path")  val posterPath: String):Parcelable{
+data class Result (val title: String,@SerializedName("poster_path") private val posterPath: String):Parcelable{
     var urlSmallPoster:String = ""
         get() = "https://image.tmdb.org/t/p/w342/$posterPath"
     var urlBigPoster:String=""

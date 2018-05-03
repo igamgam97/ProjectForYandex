@@ -1,4 +1,4 @@
-package com.example.gamgam.applicationforyandex
+package com.example.gamgam.applicationforyandex.TheMovieDB_API
 
 import io.reactivex.Observable
 import retrofit2.http.GET

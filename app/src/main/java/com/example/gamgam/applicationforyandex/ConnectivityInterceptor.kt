@@ -7,7 +7,6 @@ import okhttp3.Response
 import java.io.IOException
 
 
-
 class ConnectivityInterceptor(private val mContext: Context) : Interceptor {
 
     @Throws(IOException::class)

@@ -1,31 +1,30 @@
-package com.example.gamgam.applicationforyandex
+package com.example.gamgam.applicationforyandex.Activity
 
 
 import android.os.Bundle
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.Menu
-import kotlinx.android.synthetic.main.activity_space_photo.*
-import kotlinx.android.synthetic.main.activity_space_photo.view.*
+import com.example.gamgam.applicationforyandex.PosterPagerAdapter
+import com.example.gamgam.applicationforyandex.R
+import com.example.gamgam.applicationforyandex.TheMovieDB_API.Result
+import kotlinx.android.synthetic.main.activity_space_poster.*
+import kotlinx.android.synthetic.main.activity_space_poster.view.*
 
 class SpacePhotoActivity : AppCompatActivity() {
     var statusProgressBar=true
     lateinit var mResults:ArrayList<Result>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_space_photo)
+        setContentView(R.layout.activity_space_poster)
         fillProgressBar()
-        mResults = intent.extras.getParcelableArrayList<Result>(EXTRA_SPACE_PHOTO)
-        val position=intent.extras.getInt("some_name")
-        Log.d("mytag",mResults[0].toString())
-        //window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-        val adapter = PosterPagerAdapter(this,mResults)
+        mResults = intent.extras.getParcelableArrayList<Result>(resources.getString(R.string.id_array_intent))
+        val position=intent.extras.getInt(resources.getString(R.string.id_position_intent))
+        val adapter = PosterPagerAdapter(this, mResults)
         pager.adapter=adapter
         pager.setCurrentItem(position,true)
         displayMetaInfo(position)
         pager.addOnPageChangeListener(getOnPageChageListerner())
-        pager.setOnClickListener { Log.d("mytag","pager on click") }
 
     }
 
@@ -44,8 +43,6 @@ class SpacePhotoActivity : AppCompatActivity() {
     }
 
 }
-
-
 
 private fun SpacePhotoActivity.fillProgressBar(){
     setSupportActionBar(toolbar_space_photo_activity)

@@ -5,4 +5,6 @@
     <string name="accessibility_overflow">50 Posters</string>
     <string name="position_of_detailview">%1$d of %2$d</string>
     <string name="share">Поделиться</string>
+    <string name="id_position_intent">id position intent</string>]
+    <string name="id_array_intent">id array intent</string>
 </resources>

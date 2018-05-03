@@ -10,10 +10,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.example.gamgam.applicationforyandex.Activity.SpacePhotoActivity
+import com.example.gamgam.applicationforyandex.Activity.hideorShowProgressBar
+import com.example.gamgam.applicationforyandex.TheMovieDB_API.Result
 import com.github.chrisbanes.photoview.PhotoView
 import java.lang.Exception
 
-class PosterPagerAdapter(private val spacePhotoActivity: SpacePhotoActivity,private val images:ArrayList<Result>) : PagerAdapter() {
+class PosterPagerAdapter(private val spacePhotoActivity: SpacePhotoActivity, private val images:ArrayList<Result>) : PagerAdapter() {
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view === `object`
     }
@@ -48,7 +51,7 @@ class PosterPagerAdapter(private val spacePhotoActivity: SpacePhotoActivity,priv
 
 
                 })
-                .error(R.drawable.logo_image)
+                .error(R.drawable.internet_error)
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(phootoView)
                 phootoView.setOnClickListener{

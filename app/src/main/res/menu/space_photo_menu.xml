@@ -4,6 +4,6 @@
     <item
         app:showAsAction="always"
         android:id="@+id/action_seach"
-        android:icon="@drawable/image_item"
+        android:icon="@drawable/logo_image"
         android:title="@string/share" />
 </menu>
