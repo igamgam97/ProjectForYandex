@@ -13,25 +13,21 @@
         <item name="android:windowBackground">@drawable/launch_screen</item>
     </style>
 
-    <!-- Theme for SpacePhotoActivity. -->
-    <style name="Theme.SpacePhoto" parent="Theme.AppCompat.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimaryDark">@android:color/black</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
 
-    <!-- Theme progressbar for SpacePhotoActivity. -->
-    <style name="HorizontelProgress" parent="Theme.AppCompat">
+
+    <!-- Theme progressbar for SpacePosterActivity. -->
+    <style name="SpacePosterProgressBar" parent="Theme.AppCompat">
         <!-- Customize your progressbar here. -->
         <item name="colorAccent">@color/mainColorPrimaryDark</item>
         <item name="android:progressBackgroundTint">@color/themeForImage</item>
     </style>
+
     <!-- Theme toolbar for MainActivity. -->
     <style name="MainToolBar">
         <item name="android:background">@color/mainColorPrimary</item>
     </style>
-    <!-- Theme toolbar SpacePhotoActivity. -->
-    <style name="ToolBar">
-        <item name="android:background">@color/spacePhohoColorPrimaryDark</item>
+    <!-- Theme toolbar  for SpacePosterActivity. -->
+    <style name="SpacePosterToolBar">
+        <item name="android:background">@color/spacePosterColorPrimaryDark</item>
     </style>
 </resources>

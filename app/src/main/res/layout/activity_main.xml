@@ -10,7 +10,7 @@
         android:layout_height="match_parent">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_mainactivity"
+            android:id="@+id/toolbar_main_activity"
             style="@style/MainToolBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,6 +20,6 @@
             android:id="@+id/rv_images"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/toolbar_mainactivity" />
+            android:layout_below="@+id/toolbar_main_activity" />
     </RelativeLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

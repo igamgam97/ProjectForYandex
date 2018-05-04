@@ -1,13 +1,13 @@
-package com.example.gamgam.applicationforyandex.Activity
+package com.example.gamgam.applicationforyandex.activity
 
 
 import android.os.Bundle
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
-import com.example.gamgam.applicationforyandex.PosterPagerAdapter
 import com.example.gamgam.applicationforyandex.R
-import com.example.gamgam.applicationforyandex.TheMovieDB_API.Result
+import com.example.gamgam.applicationforyandex.adapters.PosterPagerAdapter
+import com.example.gamgam.applicationforyandex.models.Result
 import kotlinx.android.synthetic.main.activity_space_poster.*
 import kotlinx.android.synthetic.main.activity_space_poster.view.*
 
@@ -15,6 +15,7 @@ class SpacePhotoActivity : AppCompatActivity() {
     var statusProgressBar=true
     lateinit var mResults:ArrayList<Result>
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_space_poster)
         fillProgressBar()
@@ -28,12 +29,8 @@ class SpacePhotoActivity : AppCompatActivity() {
 
     }
 
-    companion object {
-
-        val EXTRA_SPACE_PHOTO = "SpacePhotoActivity.SPACE_PHOTO"
-    }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.space_photo_menu,menu)
+        menuInflater.inflate(R.menu.space_poster_menu,menu)
         return true
     }
 
@@ -67,17 +64,19 @@ private fun SpacePhotoActivity.getOnPageChageListerner(): ViewPager.OnPageChange
         }
     }
 }
+
+
 fun SpacePhotoActivity.hideorShowProgressBar(){
-    if(statusProgressBar){
+    statusProgressBar = if(statusProgressBar){
         supportActionBar!!.hide()
-        statusProgressBar=false
+        false
     }else{
         supportActionBar!!.show()
-        statusProgressBar=true
+        true
     }
     //toolbar_space_photo_activity.animate().translationY((-toolbar_space_photo_activity.height).toFloat()).interpolator = LinearInterpolator()
 }
 
-private fun SpacePhotoActivity.displayMetaInfo(position: Int) {
+fun SpacePhotoActivity.displayMetaInfo(position: Int) {
    toolbar_space_photo_activity.position_poster.text=resources.getString(R.string.position_of_detailview,position+1,mResults.size)
 }

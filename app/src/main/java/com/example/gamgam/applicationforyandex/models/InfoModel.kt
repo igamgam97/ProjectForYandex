@@ -1,4 +1,4 @@
-package com.example.gamgam.applicationforyandex.TheMovieDB_API
+package com.example.gamgam.applicationforyandex.models
 
 import android.os.Parcel
 import android.os.Parcelable

@@ -1,4 +1,4 @@
-package com.example.gamgam.applicationforyandex.Network
+package com.example.gamgam.applicationforyandex.network
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -6,7 +6,7 @@ import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException
 
-
+//this package catch network connection errors
 class ConnectivityInterceptor(private val mContext: Context) : Interceptor {
 
     @Throws(IOException::class)
@@ -20,7 +20,7 @@ class ConnectivityInterceptor(private val mContext: Context) : Interceptor {
     }
 
 }
-
+//check network connection
 object NetworkUtil{
     fun isOnline(context: Context): Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

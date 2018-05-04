@@ -1,4 +1,4 @@
-package com.example.gamgam.applicationforyandex
+package com.example.gamgam.applicationforyandex.adapters
 
 import android.graphics.Bitmap
 import android.support.v4.view.PagerAdapter
@@ -10,19 +10,20 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.example.gamgam.applicationforyandex.Activity.SpacePhotoActivity
-import com.example.gamgam.applicationforyandex.Activity.hideorShowProgressBar
-import com.example.gamgam.applicationforyandex.TheMovieDB_API.Result
+import com.example.gamgam.applicationforyandex.R
+import com.example.gamgam.applicationforyandex.activity.SpacePhotoActivity
+import com.example.gamgam.applicationforyandex.activity.hideorShowProgressBar
+import com.example.gamgam.applicationforyandex.models.Result
 import com.github.chrisbanes.photoview.PhotoView
 import java.lang.Exception
 
-class PosterPagerAdapter(private val spacePhotoActivity: SpacePhotoActivity, private val images:ArrayList<Result>) : PagerAdapter() {
+class PosterPagerAdapter(private val spacePhotoActivity: SpacePhotoActivity, private val mResults:ArrayList<Result>) : PagerAdapter() {
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view === `object`
     }
 
     override fun getCount(): Int {
-        return images.size
+        return mResults.size
     }
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
@@ -30,13 +31,12 @@ class PosterPagerAdapter(private val spacePhotoActivity: SpacePhotoActivity, pri
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val view = LayoutInflater.from(container.context).inflate(R.layout.slider_image,container,false)
+        val view = LayoutInflater.from(container.context).inflate(R.layout.slider_poster,container,false)
         val phootoView =view.findViewById<PhotoView>(R.id.image)
         val  progressBar =view.findViewById<ProgressBar>(R.id.progress)
-        val imageSpace = images[position]
 
         Glide.with(container.context)
-                .load(imageSpace.urlBigPoster)
+                .load(mResults[position].urlBigPoster)
                 .asBitmap()
                 .listener(object : RequestListener<String, Bitmap> {
                     override fun onException(e: Exception?, model: String?, target: Target<Bitmap>?, isFirstResource: Boolean): Boolean {

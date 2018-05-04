@@ -1,7 +1,7 @@
-package com.example.gamgam.applicationforyandex.TheMovieDB_API
+package com.example.gamgam.applicationforyandex.api
 
 import android.content.Context
-import com.example.gamgam.applicationforyandex.Network.ConnectivityInterceptor
+import com.example.gamgam.applicationforyandex.network.ConnectivityInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
