@@ -32,9 +32,8 @@ class PosterPagerAdapter(private val spacePhotoActivity: SpacePhotoActivity, pri
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val view = LayoutInflater.from(container.context).inflate(R.layout.slider_poster,container,false)
-        val phootoView =view.findViewById<PhotoView>(R.id.image)
+        val photoView =view.findViewById<PhotoView>(R.id.poster)
         val  progressBar =view.findViewById<ProgressBar>(R.id.progress)
-
         Glide.with(container.context)
                 .load(mResults[position].urlBigPoster)
                 .asBitmap()
@@ -53,8 +52,8 @@ class PosterPagerAdapter(private val spacePhotoActivity: SpacePhotoActivity, pri
                 })
                 .error(R.drawable.internet_error)
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .into(phootoView)
-                phootoView.setOnClickListener{
+                .into(photoView)
+                photoView.setOnClickListener{
                     spacePhotoActivity.hideorShowProgressBar()
                 }
 

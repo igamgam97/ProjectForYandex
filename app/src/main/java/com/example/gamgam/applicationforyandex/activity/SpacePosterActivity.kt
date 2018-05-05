@@ -11,26 +11,38 @@ import com.example.gamgam.applicationforyandex.models.Result
 import kotlinx.android.synthetic.main.activity_space_poster.*
 import kotlinx.android.synthetic.main.activity_space_poster.view.*
 
-class SpacePhotoActivity : AppCompatActivity() {
-    var statusProgressBar=true
-    lateinit var mResults:ArrayList<Result>
+class SpacePhotoActivity : AppCompatActivity(),ViewPager.OnPageChangeListener {
+
+
+    var statusProgressBar = true
+    lateinit var mResults: ArrayList<Result>
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_space_poster)
         fillProgressBar()
         mResults = intent.extras.getParcelableArrayList<Result>(resources.getString(R.string.id_array_intent))
-        val position=intent.extras.getInt(resources.getString(R.string.id_position_intent))
-        val adapter = PosterPagerAdapter(this, mResults)
-        pager.adapter=adapter
-        pager.setCurrentItem(position,true)
-        displayMetaInfo(position)
-        pager.addOnPageChangeListener(getOnPageChageListerner())
+        val position = intent.extras.getInt(resources.getString(R.string.id_position_intent))
+        with(pager) {
+            adapter = PosterPagerAdapter(this@SpacePhotoActivity, mResults)
+            setCurrentItem(position, true)
+            addOnPageChangeListener(this@SpacePhotoActivity)
+        }
+
+    }
+    override fun onPageScrollStateChanged(state: Int) {
+    }
+
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
 
     }
 
+    override fun onPageSelected(position: Int) {
+        displayMetaInfo(position)
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.space_poster_menu,menu)
+        menuInflater.inflate(R.menu.space_poster_menu, menu)
         return true
     }
 
@@ -41,36 +53,21 @@ class SpacePhotoActivity : AppCompatActivity() {
 
 }
 
-private fun SpacePhotoActivity.fillProgressBar(){
+private fun SpacePhotoActivity.fillProgressBar() {
     setSupportActionBar(toolbar_space_photo_activity)
     supportActionBar!!.setDisplayShowTitleEnabled(false)
     supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     supportActionBar!!.setDisplayShowHomeEnabled(true)
 }
 
-private fun SpacePhotoActivity.getOnPageChageListerner(): ViewPager.OnPageChangeListener {
-    return object : ViewPager.OnPageChangeListener {
-
-        override fun onPageSelected(position: Int) {
-            displayMetaInfo(position)
-
-        }
-
-        override fun onPageScrolled(arg0: Int, arg1: Float, arg2: Int) {
-        }
-
-        override fun onPageScrollStateChanged(arg0: Int) {
-
-        }
-    }
-}
 
 
-fun SpacePhotoActivity.hideorShowProgressBar(){
-    statusProgressBar = if(statusProgressBar){
+
+fun SpacePhotoActivity.hideorShowProgressBar() {
+    statusProgressBar = if (statusProgressBar) {
         supportActionBar!!.hide()
         false
-    }else{
+    } else {
         supportActionBar!!.show()
         true
     }
@@ -78,5 +75,5 @@ fun SpacePhotoActivity.hideorShowProgressBar(){
 }
 
 fun SpacePhotoActivity.displayMetaInfo(position: Int) {
-   toolbar_space_photo_activity.position_poster.text=resources.getString(R.string.position_of_detailview,position+1,mResults.size)
+    toolbar_space_photo_activity.position_poster.text = resources.getString(R.string.position_of_detail_view, position + 1, mResults.size)
 }

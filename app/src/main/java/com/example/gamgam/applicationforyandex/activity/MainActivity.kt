@@ -2,6 +2,7 @@ package com.example.gamgam.applicationforyandex.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -20,7 +21,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),SwipeRefreshLayout.OnRefreshListener {
     private lateinit var theMovieDBApi: TheMovieDBApi
     private lateinit var mResults: ArrayList<Result>
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,19 +29,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar_main_activity)
-        val layoutManager = GridLayoutManager(this, 2)
-        rv_images.setHasFixedSize(true)
-        rv_images.layoutManager = layoutManager
-        theMovieDBApi = Controller.getApi(this)
-        mResults = ArrayList()
-        rv_images.adapter = getAdapterForRecyclerView(mResults)
-        getDataList()
-        simpleSwipeRefreshLayout.setOnRefreshListener {
-            getDataList()
+        with(rv_images){
+            setHasFixedSize(true)
+            layoutManager=GridLayoutManager(this@MainActivity,2)
+            adapter=getAdapterForRecyclerView(mResults)
         }
+        theMovieDBApi = Controller.getApi(this)
+        getDataList()
+        simpleSwipeRefreshLayout.setOnRefreshListener (this)
 
     }
-
+    override fun onRefresh() {
+        getDataList()
+    }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_info_menu, menu)
         return true
@@ -60,29 +61,28 @@ class MainActivity : AppCompatActivity() {
         theMovieDBApi.getDate()
                 .subscribeOn(Schedulers.io())
                 .filter { item -> item.results.sorted() != mResults }
-                .doOnNext { mResults.clear() }
-                .doOnNext { item -> mResults.addAll(item.results.sorted()) }
+                .doOnNext { item-> mResults= item.results.sorted<Result>() as ArrayList<Result> }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ refheshView() }, { error ->
                     showTypeOfError(error)
                 },{simpleSwipeRefreshLayout.isRefreshing=false})
     }
 
-    fun MainActivity.refheshView() {
-        rv_images.adapter.notifyDataSetChanged()
-    }
 
 
-    fun MainActivity.showTypeOfError(error: Throwable) {
-        when (error) {
-            is NoConnectivityException -> {
-                Toasty.error(applicationContext, "Check your network connection", Toast.LENGTH_SHORT, true).show()
-            }
-            else -> {
-                Toasty.error(applicationContext, "Unknown error", Toast.LENGTH_SHORT, true).show()
-            }
+}
+fun MainActivity.showTypeOfError(error: Throwable) {
+    when (error) {
+        is NoConnectivityException -> {
+            Toasty.error(applicationContext, "Check your network connection", Toast.LENGTH_SHORT, true).show()
         }
-        simpleSwipeRefreshLayout.isRefreshing = false
-
+        else -> {
+            Toasty.error(applicationContext, "Unknown error", Toast.LENGTH_SHORT, true).show()
+        }
     }
+    simpleSwipeRefreshLayout.isRefreshing = false
+
+}
+fun MainActivity.refheshView() {
+    rv_images.adapter.notifyDataSetChanged()
 }
