@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.widget.Toast
@@ -29,12 +30,14 @@ class MainActivity : AppCompatActivity(),SwipeRefreshLayout.OnRefreshListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar_main_activity)
+        mResults=ArrayList()
         with(rv_images){
             setHasFixedSize(true)
             layoutManager=GridLayoutManager(this@MainActivity,2)
             adapter=getAdapterForRecyclerView(mResults)
         }
         theMovieDBApi = Controller.getApi(this)
+        simpleSwipeRefreshLayout.isRefreshing=true
         getDataList()
         simpleSwipeRefreshLayout.setOnRefreshListener (this)
 
@@ -57,11 +60,12 @@ class MainActivity : AppCompatActivity(),SwipeRefreshLayout.OnRefreshListener {
     }
 
     private fun getDataList() {
-        //rv_images.adapter.notifyDataSetChanged()
         theMovieDBApi.getDate()
                 .subscribeOn(Schedulers.io())
                 .filter { item -> item.results.sorted() != mResults }
-                .doOnNext { item-> mResults= item.results.sorted<Result>() as ArrayList<Result> }
+                .doOnNext { mResults.clear() }
+                .flatMapIterable { item -> item.results.sorted() }
+                .doOnNext { result -> mResults.add(result) }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ refheshView() }, { error ->
                     showTypeOfError(error)
@@ -78,6 +82,7 @@ fun MainActivity.showTypeOfError(error: Throwable) {
         }
         else -> {
             Toasty.error(applicationContext, "Unknown error", Toast.LENGTH_SHORT, true).show()
+            Log.d("mytag",error.localizedMessage)
         }
     }
     simpleSwipeRefreshLayout.isRefreshing = false

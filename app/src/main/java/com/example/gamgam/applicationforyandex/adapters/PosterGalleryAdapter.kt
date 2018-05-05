@@ -20,6 +20,7 @@ class PosterGalleryAdapter(private val mResults: ArrayList<Result>, private val 
 
     override fun getItemCount() = mResults.size
 
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imageView = itemView.findViewById<ImageView>(R.id.iv_poster)
         fun bind(mResult: Result, position: Int, listener:(View, Int)->Unit) {
