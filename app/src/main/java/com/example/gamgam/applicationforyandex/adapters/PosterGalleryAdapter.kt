@@ -12,6 +12,7 @@ import com.example.gamgam.applicationforyandex.models.Result
 
 class PosterGalleryAdapter(private val mResults: ArrayList<Result>, private val listener: (View, Int) -> Unit) : RecyclerView.Adapter<PosterGalleryAdapter.ViewHolder>() {
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
             ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_poster, parent, false))
 
@@ -26,7 +27,7 @@ class PosterGalleryAdapter(private val mResults: ArrayList<Result>, private val 
         fun bind(mResult: Result, position: Int, listener:(View, Int)->Unit) {
             Glide.with(itemView.context)
                     .load(mResult.urlSmallPoster)
-                    .crossFade()
+                    .placeholder(R.drawable.placeholder)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(imageView)
 

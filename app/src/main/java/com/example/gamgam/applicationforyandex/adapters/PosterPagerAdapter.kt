@@ -17,7 +17,7 @@ import com.example.gamgam.applicationforyandex.models.Result
 import com.github.chrisbanes.photoview.PhotoView
 import java.lang.Exception
 
-class PosterPagerAdapter(private val spacePhotoActivity: SpacePhotoActivity, private val mResults:ArrayList<Result>) : PagerAdapter() {
+class PosterPagerAdapter(private val spacePhotoActivity: SpacePhotoActivity, private val mResults: ArrayList<Result>) : PagerAdapter() {
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view === `object`
     }
@@ -31,9 +31,9 @@ class PosterPagerAdapter(private val spacePhotoActivity: SpacePhotoActivity, pri
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val view = LayoutInflater.from(container.context).inflate(R.layout.slider_poster,container,false)
-        val photoView =view.findViewById<PhotoView>(R.id.poster)
-        val  progressBar =view.findViewById<ProgressBar>(R.id.progress)
+        val view = LayoutInflater.from(container.context).inflate(R.layout.slider_poster, container, false)
+        val photoView = view.findViewById<PhotoView>(R.id.poster)
+        val progressBar = view.findViewById<ProgressBar>(R.id.progress)
         Glide.with(container.context)
                 .load(mResults[position].urlBigPoster)
                 .asBitmap()
@@ -53,9 +53,9 @@ class PosterPagerAdapter(private val spacePhotoActivity: SpacePhotoActivity, pri
                 .error(R.drawable.internet_error)
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(photoView)
-                photoView.setOnClickListener{
-                    spacePhotoActivity.hideorShowProgressBar()
-                }
+        photoView.setOnClickListener {
+            spacePhotoActivity.hideorShowProgressBar()
+        }
 
         container.addView(view)
         return view
